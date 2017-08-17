@@ -32,7 +32,7 @@ export default class AuthScreen extends Component {
     // 1. Slide out the form container
     await this._setVisibleForm(null)
     // 2. Fade out the logo
-    await this.logoImgRef.fadeOut(800)
+    await this.logoImgRef.fadeOut(400)
     // 3. Tell the container (app.js) that the animation has completed
     this.props.onLoginAnimationCompleted()
   }
@@ -75,6 +75,7 @@ export default class AuthScreen extends Component {
         )}
 
         <KeyboardAvoidingView
+          keyboardVerticalOffset={-100}
           behavior="padding">
 
           {(visibleForm === 'SIGNUP') && (

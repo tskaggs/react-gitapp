@@ -19,8 +19,8 @@ export default class RegistrationForm extends Component {
     if (this.buttonRef && this.formRef && this.linkRef) {
       await Promise.all([
         this.buttonRef.zoomOut(200),
-        this.formRef.fadeOut(300),
-        this.linkRef.fadeOut(300)
+        this.formRef.fadeOut(100),
+        this.linkRef.fadeOut(100)
       ])
     }
   }
