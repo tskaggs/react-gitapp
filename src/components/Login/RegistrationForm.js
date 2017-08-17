@@ -2,11 +2,11 @@ import React, { Component, PropTypes } from 'react';
 import { StyleSheet, TextInput, TouchableOpacity, StatusBar } from 'react-native';
 import { Text, View } from 'react-native-animatable'
 
-export default class LoginForm extends Component {
+export default class RegistrationForm extends Component {
   static propTypes = {
     isLoading: PropTypes.bool.isRequired,
-    onLoginPress: PropTypes.func.isRequired,
-    onSignupLinkPress: PropTypes.func.isRequired
+    onSignupPress: PropTypes.func.isRequired,
+    onLoginLinkPress: PropTypes.func.isRequired
   }
 
   state = {
@@ -26,14 +26,23 @@ export default class LoginForm extends Component {
   }
 
   render() {
-    const { email, password } = this.state
-    const { isLoading, onSignupLinkPress, onLoginPress } = this.props
-    const isValid = email !== '' && password !== ''
+    const { email, password, fullName } = this.state
+    const { isLoading, onLoginLinkPress, onSignupPress } = this.props
+    const isValid = email !== '' && password !== '' && fullName !== ''
 
     return (
       <View style={styles.container}>
         <StatusBar
           barStyle="light-content"
+          />
+
+        <TextInput
+          placeholder="Full name"
+          placeholderTextColor="rgba(255, 255, 255, 0.7)"
+          returnKeyType="next"
+          onSubmitEditing={() => this.emailInputRef.focus()}
+          autoCorrect={false}
+          style={styles.input}
           />
         <TextInput
           placeholder="username or email"
@@ -44,6 +53,7 @@ export default class LoginForm extends Component {
           autoCapitalize="none"
           autoCorrect={false}
           style={styles.input}
+          ref={(input) => this.emailInputRef = input}
           />
         <TextInput
           placeholder="password"
@@ -54,7 +64,7 @@ export default class LoginForm extends Component {
           ref={(input) => this.passwordInput = input}
           />
         <TouchableOpacity style={styles.buttonContainer}>
-          <Text style={styles.buttonText}>LOGIN</Text>
+          <Text style={styles.buttonText}>Register</Text>
         </TouchableOpacity>
       </View>
     );

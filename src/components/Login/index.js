@@ -1,13 +1,14 @@
 import React, { Component, PropTypes } from 'react';
-import { StyleSheet, Text, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, Text, KeyboardAvoidingView, LayoutAnimation, Platform, UIManager } from 'react-native';
 import { Image, View } from 'react-native-animatable';
 
 import imgLogo from '../../images/Octocat.png'
 
 import Wrapper from './Wrapper';
 import LoginForm from './LoginForm';
+import RegistrationForm from './RegistrationForm';
 
-export default class Login extends Component {
+export default class AuthScreen extends Component {
   static propTypes = {
     isLoggedIn: PropTypes.bool.isRequired,
     isLoading: PropTypes.bool.isRequired,
@@ -65,10 +66,37 @@ export default class Login extends Component {
             ref={(ref) => this.logoImgRef = ref}
             />
         </View>
-        <Wrapper
-          onCreateAccountPress={() => this._setVisibleForm('SIGNUP')}
-          onSignInPress={() => this._setVisibleForm('LOGIN')}
-          />
+
+        {(!visibleForm && !isLoggedIn) && (
+          <Wrapper
+            onCreateAccountPress={() => this._setVisibleForm('SIGNUP')}
+            onSignInPress={() => this._setVisibleForm('LOGIN')}
+            />
+        )}
+
+        <KeyboardAvoidingView
+          behavior="padding">
+
+          {(visibleForm === 'SIGNUP') && (
+            <RegistrationForm
+              ref={(ref) => this.formRef = ref}
+              onLoginLinkPress={() => this._setVisibleForm('LOGIN')}
+              onSignupPress={signup}
+              isLoading={isLoading}
+              />
+          )}
+
+          {(visibleForm === 'LOGIN') && (
+            <LoginForm
+              ref={(ref) => this.formRef = ref}
+              onSignupLinkPress={() => this._setVisibleForm('SIGNUP')}
+              onLoginPress={login}
+              isLoading={isLoading}
+              />
+          )}
+
+        </KeyboardAvoidingView>
+
       </View>
     );
   }

@@ -15,21 +15,21 @@ const CustomButton = ({ onPress, isEnabled, isLoading, text, buttonStyle, textSt
       </TouchableOpacity>
     </View>
   )
+}
 
-  CustomButton.propTypes = {
-    onPress: PropTypes.func,
-    isEnabled: PropTypes.bool,
-    isLoading: PropTypes.bool,
-    text: PropTypes.string,
-    buttonStyle: PropTypes.any,
-    textStyle: PropTypes.any
-  }
+CustomButton.propTypes = {
+  onPress: PropTypes.func,
+  isEnabled: PropTypes.bool,
+  isLoading: PropTypes.bool,
+  text: PropTypes.string,
+  buttonStyle: PropTypes.any,
+  textStyle: PropTypes.any
+}
 
-  CustomButton.defaultProps = {
-    onPress: () => null,
-    isEnabled: true,
-    isLoading: false
-  }
+CustomButton.defaultProps = {
+  onPress: () => null,
+  isEnabled: true,
+  isLoading: false
 }
 
 const styles = StyleSheet.create({
