@@ -53,9 +53,26 @@ export default class LoginForm extends Component {
           style={styles.input}
           ref={(input) => this.passwordInput = input}
           />
-        <TouchableOpacity style={styles.buttonContainer}>
+        <TouchableOpacity
+          onPress={() => onLoginPress(email, password)}
+          isEnabled={isValid}
+          isLoading={isLoading}
+          style={styles.buttonContainer}>
           <Text style={styles.buttonText}>LOGIN</Text>
         </TouchableOpacity>
+
+        <View style={styles.footer}>
+          <Text
+            ref={(ref) => this.linkRef = ref}
+            style={styles.signupLink}
+            onPress={onSignupLinkPress}
+            animation={'fadeIn'}
+            duration={600}
+            delay={400}
+          >
+            {'Not registered yet?'}
+          </Text>
+        </View>
       </View>
     );
   }
@@ -80,5 +97,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#FFFFFF',
     fontWeight: '700'
+  },
+  footer: {
+    height: 100,
+    justifyContent: 'center'
+  },
+  signupLink: {
+    color: 'rgba(255,255,255,0.6)',
+    alignSelf: 'center',
+    padding: 20
   }
 })

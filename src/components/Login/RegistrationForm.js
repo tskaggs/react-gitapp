@@ -63,9 +63,26 @@ export default class RegistrationForm extends Component {
           style={styles.input}
           ref={(input) => this.passwordInput = input}
           />
-        <TouchableOpacity style={styles.buttonContainer}>
+        <TouchableOpacity
+          onPress={() => onSignupPress(email, password, fullName)}
+          isEnabled={isValid}
+          isLoading={isLoading}
+          style={styles.buttonContainer}>
           <Text style={styles.buttonText}>Register</Text>
         </TouchableOpacity>
+
+        <View style={styles.footer}>
+          <Text
+            ref={(ref) => this.linkRef = ref}
+            style={styles.loginLink}
+            onPress={onLoginLinkPress}
+            animation={'fadeIn'}
+            duration={600}
+            delay={400}
+          >
+            {'Already have an account?'}
+          </Text>
+        </View>
       </View>
     );
   }
@@ -90,5 +107,21 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#FFFFFF',
     fontWeight: '700'
+  },
+  footer: {
+    height: 100,
+    justifyContent: 'center'
+  },
+  createAccountButton: {
+    backgroundColor: 'white'
+  },
+  createAccountButtonText: {
+    color: '#3E464D',
+    fontWeight: 'bold'
+  },
+  loginLink: {
+    color: 'rgba(255,255,255,0.6)',
+    alignSelf: 'center',
+    padding: 20
   }
 })
