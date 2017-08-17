@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { StyleSheet, Text, KeyboardAvoidingView } from 'react-native';
 import { Image, View } from 'react-native-animatable';
 
@@ -8,28 +8,67 @@ import Wrapper from './Wrapper';
 import LoginForm from './LoginForm';
 
 export default class Login extends Component {
+  static propTypes = {
+    isLoggedIn: PropTypes.bool.isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    signup: PropTypes.func.isRequired,
+    login: PropTypes.func.isRequired,
+    onLoginAnimationCompleted: PropTypes.func.isRequired // Called at the end of a succesfull login/signup animation
+  }
+
+  state = {
+    visibleForm: null // Can be: null | SIGNUP | LOGIN
+  }
+
+  componentWillUpdate (nextProps) {
+    // If the user has logged/signed up succesfully start the hide animation
+    if (!this.props.isLoggedIn && nextProps.isLoggedIn) {
+      this._hideAuthScreen()
+    }
+  }
+
+  _hideAuthScreen = async () => {
+    // 1. Slide out the form container
+    await this._setVisibleForm(null)
+    // 2. Fade out the logo
+    await this.logoImgRef.fadeOut(800)
+    // 3. Tell the container (app.js) that the animation has completed
+    this.props.onLoginAnimationCompleted()
+  }
+
+  _setVisibleForm = async (visibleForm) => {
+    // 1. Hide the current form (if any)
+    if (this.state.visibleForm && this.formRef && this.formRef.hideForm) {
+      await this.formRef.hideForm()
+    }
+    // 2. Configure a spring animation for the next step
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
+    // 3. Set the new visible form
+    this.setState({ visibleForm })
+  }
+
+
   render() {
+    const { isLoggedIn, isLoading, signup, login } = this.props
+    const { visibleForm } = this.state
+    // The following style is responsible of the "bounce-up from bottom" animation of the form
+    const formStyle = (!visibleForm) ? { height: 0 } : { marginTop: 40 }
     return (
       <View style={styles.container}>
-        <View
-          animation={'bounceIn'}
-          duration={1200}
-          delay={200}
-          style={styles.logoContainer}>
+        <View style={styles.logoContainer}>
           <Image
+            animation={'bounceIn'}
+            duration={1200}
+            delay={200}
             style={styles.logo}
             source={imgLogo}
+            ref={(ref) => this.logoImgRef = ref}
             />
-          <Wrapper/>
-
         </View>
-        <KeyboardAvoidingView
-          keyboardVerticalOffset={100}
-          behavior={'padding'}
-          style={styles.formContainer}
-        >
-          <LoginForm />
-        </KeyboardAvoidingView>
+        <Wrapper
+          onCreateAccountPress={() => this._setVisibleForm('SIGNUP')}
+          onSignInPress={() => this._setVisibleForm('LOGIN')}
+          />
       </View>
     );
   }
@@ -49,7 +88,6 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     flex: 1,
-    // height: null,
     alignSelf: 'center',
     resizeMode: 'contain',
     marginVertical: 30

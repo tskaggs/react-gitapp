@@ -8,7 +8,6 @@ export default class App extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      timePassed: false,
       isLoggedIn: false, // Is the user authenticated?
       isLoading: false, // Is the user loggingIn/signinUp?
       isAppReady: false // Has the app completed the login animation?
@@ -25,41 +24,22 @@ export default class App extends React.Component {
     setTimeout(() => this.setState({ isLoggedIn: true, isLoading: false }), 1000)
   }
 
-  componentDidMount() {
-    setTimeout(() => {
-      this.setTimePassed();
-    }, 3000);
-  }
-
-  setTimePassed() {
-     this.setState({timePassed: true});
-  }
-
   render() {
-    // if (this.state.isAppReady) {
-    //   return (
-    //     <HomeScreen
-    //       logout={() => this.setState({ isLoggedIn: false, isAppReady: false })}
-    //     />
-    //   )
-    // } else {
-    //   return (
-    //     <AuthScreen
-    //       login={this._simulateLogin}
-    //       signup={this._simulateSignup}
-    //       isLoggedIn={this.state.isLoggedIn}
-    //       isLoading={this.state.isLoading}
-    //       onLoginAnimationCompleted={() => this.setState({ isAppReady: true })}
-    //     />
-    //   )
-    // }
-    if (!this.state.timePassed){
+    if (this.state.isAppReady) {
       return (
-        <Splash/>
+        <Splash
+          logout={() => this.setState({ isLoggedIn: false, isAppReady: false })}
+        />
       )
-    }else{
+    } else {
       return (
-        <AuthScreen/>
+        <AuthScreen
+          login={this._simulateLogin}
+          signup={this._simulateSignup}
+          isLoggedIn={this.state.isLoggedIn}
+          isLoading={this.state.isLoading}
+          onLoginAnimationCompleted={() => this.setState({ isAppReady: true })}
+        />
       )
     }
   }
