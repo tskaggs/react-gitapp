@@ -4,6 +4,7 @@ import { Image, View } from 'react-native-animatable';
 
 import imgLogo from '../../images/Octocat.png'
 
+import Wrapper from './Wrapper';
 import LoginForm from './LoginForm';
 
 export default class Login extends Component {
@@ -17,7 +18,10 @@ export default class Login extends Component {
           style={styles.logoContainer}>
           <Image
             style={styles.logo}
-            source={imgLogo} />
+            source={imgLogo}
+            />
+          <Wrapper/>
+
         </View>
         <KeyboardAvoidingView
           keyboardVerticalOffset={100}

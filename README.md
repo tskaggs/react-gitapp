@@ -1,3 +1,9 @@
+I'm working with these tutorials right now:
+
+* [React Native Tutorial #1 - Making a splash screen](https://www.youtube.com/watch?v=FUdy4PHIbww)
+* [React Native Tutorial #2 - Making a login screen](https://www.youtube.com/watch?v=1xu1eeRCPEk)
+* [A React-Native login animation example](https://github.com/mmazzarolo/react-native-login-animation-example)
+
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
 Below you'll find information about performing common tasks. The most recent version of this guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
