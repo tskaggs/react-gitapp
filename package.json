@@ -20,10 +20,12 @@
   },
   "dependencies": {
     "expo": "^19.0.0",
+    "expo-three": "^1.0.4",
     "react": "16.0.0-alpha.12",
     "react-native": "^0.46.1",
     "react-native-animatable": "^1.2.3",
     "react-timeout": "^1.0.1",
-    "react-timer-mixin": "^0.13.3"
+    "react-timer-mixin": "^0.13.3",
+    "three": "^0.86.0"
   }
 }

@@ -1,12 +1,21 @@
-import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { Component, PropTypes } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 export default class Splash extends Component {
+  static propTypes = {
+    logout: PropTypes.func
+  }
+
   render() {
     return (
       <View style={styles.wrapper}>
         <View style={styles.titleWrapper}>
           <Text style={styles.title}>Github App</Text>
+          <TouchableOpacity
+            onPress={this.props.logout}
+            style={styles.buttonContainer}>
+            <Text style={styles.buttonText}>Logout</Text>
+          </TouchableOpacity>
         </View>
         <Text style={styles.subtitle}>Powered by React Native</Text>
       </View>
@@ -34,5 +43,14 @@ export default class Splash extends Component {
    titleWrapper: {
      justifyContent: 'center',
      flex: 1
-   }
+   },
+   buttonContainer: {
+     backgroundColor: '#e67e22',
+     paddingVertical: 15
+   },
+   buttonText: {
+     textAlign: 'center',
+     color: '#FFFFFF',
+     fontWeight: '700'
+   },
  });
