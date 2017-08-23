@@ -2,11 +2,12 @@ import React, { Component, PropTypes } from 'react';
 import { StyleSheet, Text, KeyboardAvoidingView, LayoutAnimation, Platform, UIManager } from 'react-native';
 import { Image, View } from 'react-native-animatable';
 
-import imgLogo from '../../images/Octocat.png'
+import imgLogo from '../../images/GitHub_Logo.png'
 
 import Wrapper from './Wrapper';
 import LoginForm from './LoginForm';
 import RegistrationForm from './RegistrationForm';
+import VrScreen from '../Vr';
 
 export default class AuthScreen extends Component {
   static propTypes = {
@@ -57,6 +58,9 @@ export default class AuthScreen extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.logoContainer}>
+          <View style={styles.orb}>
+            <VrScreen />
+          </View>
           <Image
             animation={'bounceIn'}
             duration={1200}
@@ -112,6 +116,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexGrow: 1,
     justifyContent: 'center'
+  },
+  orb: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
   },
   logo: {
     width: 100,

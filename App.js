@@ -3,8 +3,6 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import Splash from './src/components/Splash/Splash';
 import AuthScreen from './src/components/Login';
-import MotionScreen from './src/components/Motion';
-import VrScreen from './src/components/Vr';
 
 export default class App extends React.Component {
   constructor(props){
@@ -35,14 +33,13 @@ export default class App extends React.Component {
       )
     } else {
       return (
-        <VrScreen />
-        // <AuthScreen
-        //   login={this._simulateLogin}
-        //   signup={this._simulateSignup}
-        //   isLoggedIn={this.state.isLoggedIn}
-        //   isLoading={this.state.isLoading}
-        //   onLoginAnimationCompleted={() => this.setState({ isAppReady: true })}
-        // />
+        <AuthScreen
+          login={this._simulateLogin}
+          signup={this._simulateSignup}
+          isLoggedIn={this.state.isLoggedIn}
+          isLoading={this.state.isLoading}
+          onLoginAnimationCompleted={() => this.setState({ isAppReady: true })}
+        />
       )
     }
   }

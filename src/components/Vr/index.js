@@ -12,13 +12,10 @@ export default class MotionScreen extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Expo.GLView
-          style={styles.container}
-          onContextCreate={this._onGLContextCreate}
-        />
-        <Text>Wooo</Text>
-      </View>
+      <Expo.GLView
+        style={styles.container}
+        onContextCreate={this._onGLContextCreate}
+      />
     );
   }
 
@@ -44,13 +41,13 @@ export default class MotionScreen extends Component {
     const material = new THREE.MeshBasicMaterial({
       // NOTE: How to create an Expo-compatible THREE texture
       map: await ExpoTHREE.createTextureAsync({
-        asset: Expo.Asset.fromModule(require('../../images/dot-1.png')),
+        asset: Expo.Asset.fromModule(require('../../images/dot-2.png')),
       }),
     });
 
     const cube = new THREE.Mesh(geometry, material);
     scene.add(cube);
-    camera.position.z = 10;
+    camera.position.z = 5;
     const render = () => {
       requestAnimationFrame(render);
 
