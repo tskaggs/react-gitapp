@@ -30,13 +30,13 @@ export default class MotionScreen extends Component {
 
     const geometry = new THREE.DodecahedronGeometry(1, 4);
 
-    const material = new THREE.MeshBasicMaterial( { wireframe: true } );
-    
-    // const material = new THREE.MeshBasicMaterial({
-    //   map: await ExpoTHREE.createTextureAsync({
-    //     asset: Expo.Asset.fromModule(require('../../images/dot-2.png')),
-    //   }),
-    // });
+    // const material = new THREE.MeshBasicMaterial( { wireframe: true } );
+
+    const material = new THREE.MeshBasicMaterial({
+      map: await ExpoTHREE.createTextureAsync({
+        asset: Expo.Asset.fromModule(require('../../images/dot-2.png')),
+      }),
+    });
 
     const cube = new THREE.Mesh(geometry, material);
 
