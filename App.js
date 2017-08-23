@@ -36,6 +36,13 @@ export default class App extends React.Component {
     } else {
       return (
         <VrScreen />
+        // <AuthScreen
+        //   login={this._simulateLogin}
+        //   signup={this._simulateSignup}
+        //   isLoggedIn={this.state.isLoggedIn}
+        //   isLoading={this.state.isLoading}
+        //   onLoginAnimationCompleted={() => this.setState({ isAppReady: true })}
+        // />
       )
     }
   }
