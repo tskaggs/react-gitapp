@@ -32,8 +32,13 @@ export default class AuthScreen extends Component {
   _hideAuthScreen = async () => {
     // 1. Slide out the form container
     await this._setVisibleForm(null)
-    // 2. Fade out the logo
-    await this.logoImgRef.fadeOut(400)
+
+    // 2. Fade out the orb
+    await this.vrOrbRef.fadeOut(10)
+
+    // 2. Fade out the orb
+    await this.logoImgRef.fadeOut(800)
+
     // 3. Tell the container (app.js) that the animation has completed
     this.props.onLoginAnimationCompleted()
   }
@@ -58,7 +63,10 @@ export default class AuthScreen extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.logoContainer}>
-          <View style={styles.orb}>
+          <View
+            style={styles.orb}
+            ref={(ref) => this.vrOrbRef = ref}
+            >
             <VrScreen />
           </View>
           <Image
@@ -81,7 +89,6 @@ export default class AuthScreen extends Component {
         <KeyboardAvoidingView
           keyboardVerticalOffset={-100}
           behavior="padding">
-
           {(visibleForm === 'SIGNUP') && (
             <RegistrationForm
               ref={(ref) => this.formRef = ref}
@@ -90,7 +97,6 @@ export default class AuthScreen extends Component {
               isLoading={isLoading}
               />
           )}
-
           {(visibleForm === 'LOGIN') && (
             <LoginForm
               ref={(ref) => this.formRef = ref}
@@ -99,9 +105,7 @@ export default class AuthScreen extends Component {
               isLoading={isLoading}
               />
           )}
-
         </KeyboardAvoidingView>
-
       </View>
     );
   }
