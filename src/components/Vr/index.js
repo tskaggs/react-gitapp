@@ -12,10 +12,13 @@ export default class MotionScreen extends Component {
 
   render() {
     return (
+      <View style={styles.container}>
         <Expo.GLView
           style={styles.container}
           onContextCreate={this._onGLContextCreate}
         />
+        <Text>Wooo</Text>
+      </View>
     );
   }
 
@@ -34,41 +37,25 @@ export default class MotionScreen extends Component {
     const renderer = ExpoTHREE.createRenderer({ gl });
     renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
 
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    // const geometry = new THREE.BoxGeometry(1, 1, 1);
+    const geometry = new THREE.DodecahedronGeometry(1, 4);
     // const geometry = new THREE.CircleGeometry( 1, 8 );
     // const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
     const material = new THREE.MeshBasicMaterial({
       // NOTE: How to create an Expo-compatible THREE texture
       map: await ExpoTHREE.createTextureAsync({
-        asset: Expo.Asset.fromModule(require('../../images/Octocat.png')),
+        asset: Expo.Asset.fromModule(require('../../images/dot-1.png')),
       }),
     });
 
-    // const loader = new THREE.CubeTextureLoader();
-    // loader.setPath( '../../images/' );
-    //
-    // const textureCube = loader.load( [
-    // 	'px.png', 'nx.png',
-    // 	'py.png', 'ny.png',
-    // 	'pz.png', 'nz.png'
-    // ] );
-
-    // const material = new THREE.MeshBasicMaterial( { color: 0xffffff, envMap: textureCube } );
-
-    // const material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
     const cube = new THREE.Mesh(geometry, material);
-    // var circle = new THREE.Mesh( geometry, material );
-
-
     scene.add(cube);
-
-    camera.position.z = 5;
-
+    camera.position.z = 10;
     const render = () => {
       requestAnimationFrame(render);
 
-      cube.rotation.x += 0.07;
-  		cube.rotation.y += 0.04;
+      cube.rotation.x += 0.03;
+  		cube.rotation.y += 0.02;
 
       renderer.render(scene, camera);
 
