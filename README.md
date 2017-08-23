@@ -1,6 +1,6 @@
-#GitHub React Native App
+# GitHub React Native App
 
-####Built with [React Native](https://facebook.github.io/react-native/) and [ThreeJS](https://threejs.org)... and more soon.
+#### Built with [React Native](https://facebook.github.io/react-native/) and [ThreeJS](https://threejs.org)... and more soon.
 
 
 ![GitHub React Native App](http://g.recordit.co/plhnGuell2.gif)
