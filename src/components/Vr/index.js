@@ -19,35 +19,31 @@ export default class MotionScreen extends Component {
     );
   }
 
-  // This is called by the `Expo.GLView` once it's initialized
   _onGLContextCreate = async (gl) => {
-    // Based on https://threejs.org/docs/#manual/introduction/Creating-a-scene
-    // In this case we instead use a texture for the material (because textures
-    // are cool!). All differences from the normal THREE.js example are
-    // indicated with a `NOTE:` comment.
-
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
       75, gl.drawingBufferWidth / gl.drawingBufferHeight, 0.1, 1000);
 
-    // NOTE: How to create an `Expo.GLView`-compatible THREE renderer
     const renderer = ExpoTHREE.createRenderer({ gl });
+
     renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
 
-    // const geometry = new THREE.BoxGeometry(1, 1, 1);
     const geometry = new THREE.DodecahedronGeometry(1, 4);
-    // const geometry = new THREE.CircleGeometry( 1, 8 );
-    // const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-    const material = new THREE.MeshBasicMaterial({
-      // NOTE: How to create an Expo-compatible THREE texture
-      map: await ExpoTHREE.createTextureAsync({
-        asset: Expo.Asset.fromModule(require('../../images/dot-2.png')),
-      }),
-    });
+
+    const material = new THREE.MeshBasicMaterial( { wireframe: true } );
+    
+    // const material = new THREE.MeshBasicMaterial({
+    //   map: await ExpoTHREE.createTextureAsync({
+    //     asset: Expo.Asset.fromModule(require('../../images/dot-2.png')),
+    //   }),
+    // });
 
     const cube = new THREE.Mesh(geometry, material);
+
     scene.add(cube);
+
     camera.position.z = 5;
+
     const render = () => {
       requestAnimationFrame(render);
 
@@ -56,7 +52,6 @@ export default class MotionScreen extends Component {
 
       renderer.render(scene, camera);
 
-      // NOTE: At the end of each frame, notify `Expo.GLView` with the below
       gl.endFrameEXP();
     }
     render();
